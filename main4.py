@@ -61,26 +61,56 @@ class Reviewer(Mentor):
             return 'Ошибка'
 
 
+some_lecturer = Lecturer('John', 'Doe')
+some_lecturer.courses_attached += ['Python', 'Git']
 
-some_lecturer = Lecturer('Some', 'Buddy')
-some_lecturer.courses_attached += ['Python'] # Добавляем курс лектору
+some_lecturer2 = Lecturer('Some', 'Buddy')
+some_lecturer2.courses_attached += ['Python', 'Java']
 
 some_student = Student('Ruoy', 'Eman', 'your_gender')
-some_student.courses_in_progress += ['Python'] + ['Git']
+some_student.courses_in_progress += ['Python', 'Git']
 some_student.finished_courses += ['Введение в программирование']
 
-some_student.rate_lecturer(some_lecturer, 'Python', 8) # Студент выставляет оценку лектору
-some_student.rate_lecturer(some_lecturer, 'Python', 5) # Студент выставляет оценку лектору
+some_student2 = Student('Bill', 'Gates', 'your_gender')
+some_student2.courses_in_progress += ['Python', 'Java']
+some_student2.finished_courses += ['Основы программирования']
 
-some_reviewer = Reviewer('Some', 'Buddy')
-some_reviewer.courses_attached += ['Python'] 
+some_reviewer = Reviewer('Sam', 'Wilson')
+some_reviewer.courses_attached += ['Python', 'Git']
+
+some_reviewer2 = Reviewer('Emily', 'Davis')
+some_reviewer2.courses_attached += ['Python', 'Java']
+
+some_student.rate_lecturer(some_lecturer, 'Python', 8)
+some_student.rate_lecturer(some_lecturer, 'Python', 9)
+some_student2.rate_lecturer(some_lecturer2, 'Python', 7)
+some_student2.rate_lecturer(some_lecturer2, 'Java', 8)
+
 some_reviewer.rate_hw(some_student, 'Python', 10)
-some_reviewer.rate_hw(some_student, 'Git', 10)
-some_reviewer.rate_hw(some_student, 'Python', 10)
+some_reviewer.rate_hw(some_student, 'Git', 9)
+some_reviewer2.rate_hw(some_student2, 'Python', 8)
+some_reviewer2.rate_hw(some_student2, 'Java', 9)
+
+def average_grade_for_course(students, course):
+    total_grades = []
+    for student in students:
+        if course in student.grades:
+            total_grades += student.grades[course]
+    return sum(total_grades) / len(total_grades) if total_grades else 0
+
+def average_grade_for_lecturers(lecturers, course):
+    total_grades = []
+    for lecturer in lecturers:
+        if course in lecturer.grades:
+            total_grades += lecturer.grades[course]
+    return sum(total_grades) / len(total_grades) if total_grades else 0
 
 
 
 print(some_reviewer)
+print(some_reviewer2)
 print(some_lecturer)
+print(some_lecturer2)
 print(some_student)
+print(some_student2)
 pass
